@@ -30,4 +30,13 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
+  fonts:
+    - family: NotoSansSC
+      fonts:
+        - asset: fonts/NotoSansSC-Regular.ttf
+        - asset: fonts/NotoSansSC-Bold.ttf
+          weight: 700
+
+  assets:
+    - assets/avatars/        
   uses-material-design: true

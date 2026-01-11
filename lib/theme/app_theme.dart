@@ -27,10 +27,10 @@ class AppRadius {
 
 class AppShadows {
   // iOS 弥散阴影
-  static final card = BoxShadow(
+  static const card = BoxShadow(
     color: AppColors.shadowColor,
     blurRadius: 20,
-    offset: const Offset(0, 8),
+    offset: Offset(0, 8),
     spreadRadius: 0,
   );
 }

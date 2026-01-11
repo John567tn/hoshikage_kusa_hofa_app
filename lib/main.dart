@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'screens/events_screen.dart';
+import 'screens/about_screen.dart'; 
 
 void main() {
   runApp(const HoshikageApp());
@@ -25,16 +26,45 @@ class HoshikageApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/events': (context) => const EventsScreen(),
-      },
+      home: const MainScreen(), 
     );
   }
 }
 
-class HomeScreen extends StatelessWidget { // ✅ 唯一一个 HomeScreen
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const EventsScreen(),
+    const AboutScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) => setState(() => _selectedIndex = index),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: '首页'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.map), label: '兽聚'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.info), label: '关于'),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
@@ -62,7 +92,10 @@ class HomeScreen extends StatelessWidget { // ✅ 唯一一个 HomeScreen
             ),
             const SizedBox(height: 32),
             ElevatedButton.icon(
-              onPressed: () => Navigator.pushNamed(context, '/events'),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EventsScreen()),
+              ),
               icon: const Icon(LucideIcons.map),
               label: const Text('查看兽聚资讯'),
               style: ElevatedButton.styleFrom(
@@ -78,3 +111,4 @@ class HomeScreen extends StatelessWidget { // ✅ 唯一一个 HomeScreen
     );
   }
 }
+
